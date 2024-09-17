@@ -60,7 +60,6 @@ async function login(req, res) {
     if (!validPass) {
       return res.status(411).json({ message: 'invalid password' });
     }
-    console.log('one');
     const userId = response._id;
     const token = jwt.sign({ userId }, JWT_SECRET, {expiresIn: '12h'  });
     if (token) {

@@ -84,12 +84,11 @@ laptopSchema.pre('save', function (next) {
 });
 
 
-// EmpSchema for enter employee detailed-------------------------
+// EmpSchema for employee detailed-------------------------
 const empSchema = new mongoose.Schema({
   empId: { type: String, required: true },
   empName: { type: String, required: true },
   empDob: { type: String, required: true },
-  /*   empPhone:{type:Number, required:true}, */
   empPhone: {
     type: String,
     required: true,
@@ -103,6 +102,9 @@ const empSchema = new mongoose.Schema({
   empEmail: { type: String, required: true },
   address: { type: String }
 })
+
+//Payslip schema-----------------------
+
 const Admin = mongoose.model('Admin', adminSchema);
 const Laptops = mongoose.model('Laptops', laptopSchema);
 const Employee = mongoose.model('Employee', empSchema)
