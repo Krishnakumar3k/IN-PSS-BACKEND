@@ -1,4 +1,5 @@
-import { Employee } from '../db/index.js';
+//import {PaySlip} from '../db/index.js';
+import {Employee, PaySlip} from '../db/employee.model.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import z from 'zod';
@@ -12,23 +13,26 @@ import { JWT_SECRET } from '../server.js';
 
     async function addEmployee(req, res) {
       const {
-        empId,
-        empName,
-        empDob,
-        empPhone, 
-        empEmail,
-        address
+        id,
+        name,
+        dob,
+        phoneNumber, 
+        email,
+        address,
+        panNumber
+
       } = req.body; 
     
       try {
         // Create and save the new employee in the database
         const newEmployee = await Employee.create({
-          empId,
-          empName,
-          empDob,
-          empPhone,
-          empEmail,
+          id,
+          name,
+          dob,
+          phoneNumber, 
+          email,
           address,
+          panNumber
         });
     
         res.status(201).json({
@@ -91,4 +95,37 @@ async function deleteEmpById(req, res) {
     res.status(500).send({ message: "Internal Server Error", error: error.message });
   }
 }
-export { addEmployee, getEmpById, updateEmpById, deleteEmpById};
+
+/**
+ * @desc aadd pay slip 
+ * @route POST /api/addpayslip
+ * @access public
+ */
+async function addPayslip(req, res) {
+  const { employee, payDate, bankName } = req.body; 
+  try {
+    const employee = await Employee.findById(employeeId);
+    if (!employee) {
+      return res.status(404).send({ message: "Employee not found" });
+    }
+    //  Create a new payslip
+    const newPayslip = new PaySlip({
+      employee: employee._id,  // Store the reference to the employee
+      payDate,
+      bankName
+    });
+    const savedPayslip = await newPayslip.save();
+    return res.status(201).send({
+      message: 'Payslip added successfully!',
+      data: savedPayslip
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: 'Internal Server Error',
+      error: error.message
+    });
+  }
+}
+
+
+export { addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip};

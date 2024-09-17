@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {addEmployee, getEmpById, updateEmpById, deleteEmpById} from '../controllers/employeeController.js';
+import {addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip} from '../controllers/employee.Controller.js';
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = Router();
@@ -31,5 +31,15 @@ router.put("/updateemp/:id", authMiddleware, updateEmpById)
  * @access public
  */
 router.delete("/deleteemp/:id", authMiddleware, deleteEmpById)
+
+
+/**
+ * @desc add new payslip
+ * @route POST /api/v2/addpayslip
+ * @access public
+ */
+router.post("/addpayslip",authMiddleware, addPayslip )
+
+
 
 export {router}
