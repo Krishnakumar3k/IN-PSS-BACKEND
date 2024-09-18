@@ -1,4 +1,4 @@
-import { Admin, Laptops } from '../db/laptop.model.js';
+import { Admin, Laptops } from '../model/Laptop.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import z from 'zod';

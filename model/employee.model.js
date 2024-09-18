@@ -30,15 +30,21 @@ const empSchema = new mongoose.Schema({
    // Payslip schema with reference to Employee schema
    const paySlipSchema = new mongoose.Schema({
     employee: {
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: 'Employee', 
+      type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
+      ref: 'Employee',
       required: true
     },
-    id: { type: String, required: true }, 
-    name: { type: String, required: true },
-    payDate : {type: String,required: true},  
-    bankName: { type: String, required: true },
+    payDate: {
+      type: String,
+      required: true
+    },
+    bankName: {
+      type: String,
+      required: true
+    }
   });
+  
+
   
 
 const Employee = mongoose.model('Employee', empSchema)

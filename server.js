@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { router } from "./routes/laptops.routes.js";
 import {router as employee} from "./routes/employee.routes.js"
-import createConnectionMongoose from './db/index.js'
+import createConnectionMongoose from './DB/index.js'
 
 
 dotenv.config();

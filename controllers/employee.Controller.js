@@ -1,5 +1,5 @@
 //import {PaySlip} from '../db/index.js';
-import {Employee, PaySlip} from '../db/employee.model.js'
+import {Employee, PaySlip} from '../model/employee.model.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import z from 'zod';
@@ -100,32 +100,44 @@ async function deleteEmpById(req, res) {
  * @desc aadd pay slip 
  * @route POST /api/addpayslip
  * @access public
- */
-async function addPayslip(req, res) {
-  const { employee, payDate, bankName } = req.body; 
+ */ 
+
+const addPayslip = async (req, res) => {
+  const { id, payDate, bankName } = req.body; 
+  console.log('Request Body:', req.body); 
   try {
-    const employee = await Employee.findById(employeeId);
-    if (!employee) {
-      return res.status(404).send({ message: "Employee not found" });
+    // Validate the employee ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({
+        message: 'Invalid Employee ID'
+      });
     }
-    //  Create a new payslip
-    const newPayslip = new PaySlip({
-      employee: employee._id,  // Store the reference to the employee
+
+    // Create and save the new PaySlip
+    const newPayslip = await PaySlip.create({
+      employee: id,
       payDate,
       bankName
     });
-    const savedPayslip = await newPayslip.save();
-    return res.status(201).send({
-      message: 'Payslip added successfully!',
-      data: savedPayslip
+
+    // Find all PaySlips (if needed)
+    const newPayslips = await PaySlip.find({});
+
+    // Respond with all PaySlips
+    return res.status(200).json({
+      status: 'success',
+      data: newPayslips,  // Alternatively, send just the newly created payslip (newPayslip)
     });
+
   } catch (error) {
     return res.status(500).send({
       message: 'Internal Server Error',
       error: error.message
     });
   }
-}
+};
+
+
 
 
 export { addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip};
