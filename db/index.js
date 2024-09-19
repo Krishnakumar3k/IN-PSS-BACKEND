@@ -1,4 +1,4 @@
-import mongoose, { createConnection } from 'mongoose';
+/* import mongoose, { createConnection } from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -11,6 +11,20 @@ const createConnectionMongoose = () => {
   })
   .then(() => console.log('Database connected successfully!'))
   .catch((err) => console.error('Database connection error:', err));
+};
+
+export default createConnectionMongoose;
+ */
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const MONGO_URI = process.env.MONGO_URI;
+
+const createConnectionMongoose = () => {
+  mongoose.connect(MONGO_URI)
+    .then(() => console.log('Database connected successfully!'))
+    .catch((err) => console.error('Database connection error:', err));
 };
 
 export default createConnectionMongoose;
