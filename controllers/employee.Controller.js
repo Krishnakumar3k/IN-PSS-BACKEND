@@ -99,27 +99,27 @@ async function deleteEmpById(req, res) {
  * @route POST /api/addpayslip
  * @access public
  */
-
 const addPayslip = async (req, res) => {
-  const { id, name, payDate, bankName } = req.body;
-  console.log('Request Body:', req.body);
+  const { id, name, payDate, bankName, basicPay,
+    tds, houseRentAllowance, projectAllowance, medicalAllowance,
+    conveyanceAllowance, totalEarnings, totalDeductions, netPay } = req.body;
+    console.log('Request Body:', req.body);
   try {
     const employee = await Employee.findOne({ id: id, name: name });
-
     if (!employee) {
       return res.status(404).send({
-        message: 'Employee not found or name does not match'
+        message: 'Employee not found: Do check that Id and Name is correct'
       });
     }
     const newPayslip = await PaySlip.create({
       employee: employee._id,
       payDate,
-      bankName
+      bankName, basicPay, tds, houseRentAllowance, projectAllowance, medicalAllowance,
+      conveyanceAllowance, totalEarnings, totalDeductions, netPay
     });
-    const newPayslips = await PaySlip.find({});
     return res.status(200).json({
       status: 'success',
-      data: newPayslips,
+      data: newPayslip,
     });
   } catch (error) {
     return res.status(500).send({
@@ -128,5 +128,7 @@ const addPayslip = async (req, res) => {
     });
   }
 };
+
+
 
 export { addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip };

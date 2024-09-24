@@ -27,23 +27,7 @@ const empSchema = new mongoose.Schema({
 })
 
   //Payslip schema-----------------------
-   // Payslip schema with reference to Employee schema
-   /* const paySlipSchema = new mongoose.Schema({
-    employee: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
-      ref: 'Employee',
-      required: true
-    },
-    payDate: {
-      type: String,
-      required: true
-    },
-    bankName: {
-      type: String,
-      required: true
-    }
-  }); */
-  
+   // Payslip schema with reference to Employee schema 
   const paySlipSchema = new mongoose.Schema({
     employee: {
       type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
@@ -57,9 +41,103 @@ const empSchema = new mongoose.Schema({
     bankName: {
       type: String,
       required: true
-    }
+    },
+    basicPay: {
+      type: Number,
+      required: true
+    },
+    tds: {
+      type: Number,
+      required: true
+    },
+    houseRentAllowance: {
+      type: Number,
+      required: true
+    },
+    projectAllowance: {
+      type: Number,
+      required: true
+    },
+    medicalAllowance: {
+      type: Number,
+      required: true
+    },
+    conveyanceAllowance: {
+      type: Number,
+      required: true
+    },
+    totalEarnings: {
+      type: Number,
+      required: true
+    },
+    totalDeductions: {
+      type: Number,
+      required: true
+    },
+    netPay: {
+      type: Number,
+      required: true
+    },
+    
   });
   
+  // PaySlip Schema
+/* const paySlipSchema = new mongoose.Schema({
+  employee: {
+    type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
+    ref: 'Employee',
+    required: true
+  },
+  payDate: {
+    type: String,
+    required: true
+  },
+  bankName: {
+    type: String,
+    required: true
+  },
+  basicPay: {
+    type: Number,
+    required: true
+  },
+  tds: {
+    type: Number,
+    required: true
+  },
+  houseRentAllowance: {
+    type: Number,
+    required: true
+  },
+  projectAllowance: {
+    type: Number,
+    required: true
+  },
+  medicalAllowance: {
+    type: Number,
+    required: true
+  },
+  conveyanceAllowance: {
+    type: Number,
+    required: true
+  },
+  totalEarnings: {
+    type: Number,
+    required: true
+  },
+  totalDeductions: {
+    type: Number,
+    required: true
+  },
+  netPay: {
+    type: Number,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+ */
 
 const Employee = mongoose.model('Employee', empSchema)
 const PaySlip =  mongoose.model("PaySlip", paySlipSchema)
