@@ -99,11 +99,11 @@ async function deleteEmpById(req, res) {
  * @route POST /api/addpayslip
  * @access public
  */
+
 const addPayslip = async (req, res) => {
   const { id, name, payDate, bankName, basicPay,
     tds, houseRentAllowance, projectAllowance, medicalAllowance,
-    conveyanceAllowance, totalEarnings, totalDeductions, netPay } = req.body;
-    console.log('Request Body:', req.body);
+    conveyanceAllowance } = req.body;
   try {
     const employee = await Employee.findOne({ id: id, name: name });
     if (!employee) {
@@ -111,11 +111,25 @@ const addPayslip = async (req, res) => {
         message: 'Employee not found: Do check that Id and Name is correct'
       });
     }
+    // salary calculation-----------------
+    const totalEarnings = basicPay + houseRentAllowance + projectAllowance + medicalAllowance + conveyanceAllowance;
+    const totalDeductions = tds;
+    const netPay = totalEarnings - totalDeductions;
+
+    // Create a new payslip for the employee---------
     const newPayslip = await PaySlip.create({
       employee: employee._id,
       payDate,
-      bankName, basicPay, tds, houseRentAllowance, projectAllowance, medicalAllowance,
-      conveyanceAllowance, totalEarnings, totalDeductions, netPay
+      bankName,
+      basicPay,
+      tds,
+      houseRentAllowance,
+      projectAllowance,
+      medicalAllowance,
+      conveyanceAllowance,
+      totalEarnings,
+      totalDeductions,
+      netPay
     });
     return res.status(200).json({
       status: 'success',
@@ -128,7 +142,6 @@ const addPayslip = async (req, res) => {
     });
   }
 };
-
 
 
 export { addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip };
