@@ -99,7 +99,6 @@ async function deleteEmpById(req, res) {
  * @route POST /api/addpayslip
  * @access public
  */
-
 const addPayslip = async (req, res) => {
   const { id, name, payDate, bankName, basicPay,
     tds, houseRentAllowance, projectAllowance, medicalAllowance,
