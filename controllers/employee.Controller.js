@@ -17,8 +17,11 @@ async function addEmployee(req, res) {
     dob,
     phoneNumber,
     email,
-    address,
-    panNumber
+    companyMail,
+    currentAddress,
+    permanentAddress,
+    panNumber,
+    joiningDate
   } = req.body;
 
   try {
@@ -29,8 +32,11 @@ async function addEmployee(req, res) {
       dob,
       phoneNumber,
       email,
-      address,
-      panNumber
+      companyMail,
+      currentAddress,
+      permanentAddress,
+      panNumber,
+      joiningDate
     });
 
     res.status(201).json({
@@ -94,6 +100,7 @@ async function deleteEmpById(req, res) {
   }
 }
 
+
 /**
  * @desc add payslip
  * @route POST /api/addpayslip
@@ -130,6 +137,7 @@ const addPayslip = async (req, res) => {
       totalDeductions,
       netPay
     });
+
     return res.status(200).json({
       status: 'success',
       data: newPayslip,
@@ -143,4 +151,5 @@ const addPayslip = async (req, res) => {
 };
 
 
-export { addEmployee, getEmpById, updateEmpById, deleteEmpById, addPayslip };
+
+export { addEmployee, getEmpById, updateEmpById, deleteEmpById,addPayslip};

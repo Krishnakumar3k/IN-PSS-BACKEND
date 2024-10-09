@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
+//const mongoose =  require("mongoose")
 
-
-// Emp-Schema for employee detailed-------------------------
+/**
+   * empSchema for employee onboarding
+   * @module models/empSchema
+   * @requires mongoose
+   */
+  
 const empSchema = new mongoose.Schema({
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -17,72 +22,27 @@ const empSchema = new mongoose.Schema({
         }
     },
     email: { type: String, required: true },
-    address: { type: String },
+    companyMail:{ type : String},
+    currentAddress:{type: String},
+    permanentAddress: { type: String },
     panNumber: {
         type: String,
         maxlength: [10, 'PAN number can not exceed 10 characters'],
         required: true,
         trim: true,
     },
+    joiningDate:{type: String, required: true},
+
+
 })
 
-  //Payslip schema-----------------------
-   // Payslip schema with reference to Employee schema 
-  const paySlipSchema = new mongoose.Schema({
-    employee: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
-      ref: 'Employee',
-      required: true
-    },
-    payDate: {
-      type: String,
-      required: true
-    },
-    bankName: {
-      type: String,
-      required: true
-    },
-    basicPay: {
-      type: Number,
-      required: true
-    },
-    tds: {
-      type: Number,
-      required: true
-    },
-    houseRentAllowance: {
-      type: Number,
-      required: true
-    },
-    projectAllowance: {
-      type: Number,
-      required: true
-    },
-    medicalAllowance: {
-      type: Number,
-      required: true
-    },
-    conveyanceAllowance: {
-      type: Number,
-      required: true
-    },
-    totalEarnings: {
-      type: Number,
-      required: true
-    },
-    totalDeductions: {
-      type: Number,
-      required: true
-    },
-    netPay: {
-      type: Number,
-      required: true
-    },
-    
-  });
-  
-  // PaySlip Schema
-/* const paySlipSchema = new mongoose.Schema({
+/**
+   * salaryschema for employee onboarding
+   * @module models/salarySchema
+   * @requires mongoose
+   */
+// PaySlip Schema
+const paySlipSchema = new mongoose.Schema({
   employee: {
     type: mongoose.Schema.Types.ObjectId, // Reference to Employee model
     ref: 'Employee',
@@ -137,8 +97,8 @@ const empSchema = new mongoose.Schema({
     default: Date.now
   }
 });
- */
+
 
 const Employee = mongoose.model('Employee', empSchema)
 const PaySlip =  mongoose.model("PaySlip", paySlipSchema)
-export { Employee, PaySlip};
+export { Employee, PaySlip,};

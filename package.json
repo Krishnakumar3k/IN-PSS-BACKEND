@@ -9,7 +9,7 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "��#\u0000 \u0000I\u0000N\u0000-\u0000P\u0000S\u0000S\u0000-\u0000B\u0000A\u0000C\u0000K\u0000E\u0000N\u0000D\u0000\r\u0000 \u0000",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -25,5 +25,6 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.3"
-  }
+  },
+  "keywords": []
 }

@@ -37,7 +37,7 @@ router.get("/allLaptops",getAllItems);
  * @access public
  */
 
-router.post("/addLaptop",authMiddleware, addNewLaptop);
+router.post("/addLaptop", addNewLaptop);
 
 /**
  * @desc re assign to user
